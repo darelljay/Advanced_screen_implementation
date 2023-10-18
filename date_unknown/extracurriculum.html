@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mobile Menu</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header id="header">
+      <div class="title_area">
+        <h2>Menu</h2>
+      </div>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a href="">homepage</a>
+            <ul class="sub">
+              <li><a href="">lorem dolor</a></li>
+              <li><a href="">ipsum adipiscing</a></li>
+              <li><a href="">tempus magna</a></li>
+              <li><a href="">feugiat veroeros</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="">generic</a>
+            <ul class="sub">
+              <li><a href="">lorem dolor</a></li>
+              <li><a href="">ipsum adipiscing</a></li>
+              <li><a href="">tempus magna</a></li>
+              <li><a href="">feugiat veroeros</a></li>
+            </ul>
+          </li>
+          <li><a href="">elements</a></li>
+          <li><a href="">submenu</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="right_area"><a href="" class="tab">Tab Menu</a></div>
+  </div>
+    <script>
+      //  메인메뉴에 마우스 오버시 => 서브 메뉴가 펼처짐
+      //  메인메뉴에 마우스 아웃시 => 서브메뉴가 사라짐 
+    // 메뉴
+    const main_menu = document.querySelectorAll("#menu > ul > li");
+
+    // 서브메뉴
+    const sub_menu = document.querySelectorAll(".sub");
+
+    // 메인메뉴들에 2가지의 엡너트를 적용
+    main_menu.forEach((el,idx)=>{
+
+      // 메인메뉴에 마우스 오버시 => 서브 메뉴가 펼처짐
+      el.addEventListener("mouseover",(e)=>{
+        // 초기 서브메뉴의 높이 0px
+        // 서브메뉴의 갯수에 따라 서브메뉴의 높이값은 달라짐 
+        //  서브메뉴의 높이 서브메뉴의 갯수 * 각 서브메뉴의 높이 
+        // => 서브메뉴.children.element.count; (1. style.height, 2.offsetheight, getBoundingClientRect().height)
+        if(sub_menu[idx].childElementCount){
+          console.log('hehe Boy')
+          // console.log(sub_menu[idx].childElementCount);
+        } 
+
+        // 마우스 오버된 각 서브메뉴의 높이
+        let sub_height = sub_menu[idx].firstElementChild.offsetHeight;
+        console.log(sub_height);
+        // 전체 서브메뉴의 높이 = 서브메뉴의 갯수 * 각 서브메뉴의 높이 
+        sub_menu[idx].style.height = `${sub_menu[idx].childElementCount*sub_height}px`
+
+      });
+      // 메인메뉴에 마우스 아웃시 => 서브 메뉴가 사라짐
+      el.addEventListener("mouseout",()=>{
+        sub_menu[idx].style.height = `0px`
+      });
+    })
+
+    </script>
+</body>
+</html>

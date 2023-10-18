@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .body {
+            background-color: red;
+        }
+
+        .wrap {
+            width: 100vw;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .title {
+            font-size: 1.5em;
+            color: #565656;
+        }
+
+        .min800,
+        .min400 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: greenyellow;
+        }
+
+        .none {
+            display: none;
+        }
+
+        /* meadia queary */
+        /* min-width */
+        /* max-width */
+
+        /* 미디어 쿼리 */
+
+        /* @media (max-width:800px) {
+    .min800{
+        display: none;
+    }
+}
+@media (max-width:400px) {
+    .min400{
+        display: none;
+    }
+} */
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1 class="title">Resize 이번트</h1>
+
+        <span class="text">800 이하의 해상도에서는 min800 클래스가 없어지고 400 이하의 해상도에서는 min400 클래스가 없어지도록 Javascript를 활용한 방식을홓 작성해
+            보세요</span>
+
+        <div class="min800">
+            min 800px
+        </div>
+        <div class="min400">
+            min 400px
+        </div>
+    </div>
+    <script>
+        const min800 = document.querySelector(".min800")
+        const min400 = document.querySelector(".min400")
+
+        window.addEventListener("resize", (event) => {
+            setTimeout(() => {
+                const width = window.innerWidth;
+
+
+                if (width <= 400) {
+                    min800.className = 'none';
+                    min400.className = 'none';
+                } else if (width <= 800) {
+                    min400.className = 'min800';
+                    min800.className = 'none';
+                } else {
+                    min800.className = 'min800';
+                    min400.className = 'min800';
+                }
+            },3000)
+
+
+            // if(width <= 800){
+            //     min800.className = 'none';
+            // }else{
+            //     min800.className = 'min800'; 
+            // }
+
+            // if(width <= 400){
+            //     min400.className = 'none';
+            // }else{
+            //     min400.className = 'min800'; 
+            // }
+        })
+    </script>
+</body>
+
+</html>

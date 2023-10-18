@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f857a6;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ff5858, #f857a6);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ff5858, #f857a6);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.head {
+    height: 18vh;
+    z-index: 2;
+    background-image: url('./img/avengers_logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 18%;
+}
+
+/* .cardWrap{
+
+    height: 100vh; 
+    width: 100vw;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+} */
+.wrap {
+    position: absolute;
+    top: 50px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.wrap > div{
+    transition: all .5s;
+    transform-style: preserve-3d;
+    perspective: 1100px;
+}
+
+.cardWrap{
+
+}
+
+.ironMan:active {
+    transform: rotateY(180deg);
+}
+
+.ironMan>div{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.card {
+    width: 300px;
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+    background-image: url('./img/avengers_bg.jpg');
+    border: 10px white solid;
+    border-radius: 15px;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.card_back {
+    /* background-size: cover;
+    background-position: center;
+    background-image: url('./img/avengers_bg.jpg'); */
+    background-color: red;
+}
+
