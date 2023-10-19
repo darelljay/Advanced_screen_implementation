@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03-2.css_3d</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html{
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .stage{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 50vh;
+      /* perspective: 400px; */
+    }
+    
+
+    .stage > .box{
+      width: 100px;
+      height: 150px;
+      background-color: blue;
+      color: #fff;
+      font-size: 2rem;
+      text-align: center;
+      margin: 20px;
+      /* transform: rotateY(50deg); */
+      transform: perspective(400px) rotateY(50deg);
+    }
+
+    .stage > .box_container{
+      width: 400px;
+      background: #c7c7c7;
+      transform-style: preserve-3d;
+    }
+    .box_container > .new_box{
+      width: 150px;
+      height: 150px;
+      background: #0cb3eb;
+      transition: 1s;
+      cursor: pointer;
+
+    }
+
+    .box.flipped{
+      transform: rotateY(180deg);
+    }
+    .new_box.active{
+      transform: rotate(45deg) translateY(200px) perspective(20px) scale(10);
+    }
+    .container{
+      width: 100vw;
+      height: 50vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .door_wrap{
+      width: 250px;
+      height: 300px;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .door{
+      width: 100%;
+      height: 100%;
+      background-size: 350px 312px;
+      background-image: url('./img/door.png');
+      /* transform-origin: 10; */
+      position: absolute;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: all ease-in-out 0.8s;
+
+    }
+    .door_inner{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      border: 1px solid #ccc;
+      align-items: center;
+      overflow: hidden;
+    }
+    img{
+      width: 50%;
+      height: 50%;
+      transition: all 0.8s ease-in-out;
+      transform: translateX(250px);
+      opacity: 0;
+    }
+    .imga{
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .door.active{
+      transition: all ease-in-out 0.8s;
+      transform: translateX(-1px) rotateY(100deg)  perspective(40px);
+      transform-origin: left top;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="box">BOX</div>
+    <div class="box">BOX</div>
+    <div class="box">BOX</div>
+    <div class="box_container">
+      <p>컨테이너 영역</p>
+      <div class="new_box"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="door_wrap">
+      <div class="door"></div>
+      <div class="door_inner">
+        <img class="donguri" src="./img/donguri.png" alt="donguri">
+      </div>
+    </div>
+    <div class="card_wrap">
+      <div class="card card_front">Front</div>
+      <div class="card card_back">Back</div>
+    </div>
+  </div>
+
+  <script>
+    const boxs = document.querySelectorAll(".box");
+    const newBox = document.querySelector(".new_box");
+    const door = document.querySelector(".door");
+    const img = document.querySelector("img");
+    boxs.forEach(element=>{
+      element.addEventListener("click",(e)=>{
+        console.log(e.target)
+        // target vs currentTarget
+        // target 클릭한 요소 
+        // currentTarget: 이벤트 걸려있는요소
+        e.target.classList.toggle("flipped")
+      // element.classList.toggle("flipped");
+      })
+    })
+
+    newBox.addEventListener("click",()=>{
+      newBox.classList.toggle("active")
+    });
+
+    door.addEventListener("click",(e)=>{
+      e.target.classList.toggle("active");
+      img.classList.toggle("imga")
+    })
+
+  </script>
+</body>
+</html>
