@@ -1,6 +1,9 @@
-const card = document.querySelectorAll(".card");
-window.addEventListener("load",(e)=>{
-card.forEach(element=>{
-    element.classList.add("active")
+const card = document.querySelectorAll(".wrap>div");
+
+card.forEach(Element=>{
+    Element.addEventListener("click",(e)=>{
+        Element.firstElementChild.classList.toggle("flip")
+        Element.firstElementChild.lastElementChild.classList.toggle("rotate")
+    })
 })
-})
+

@@ -108,7 +108,44 @@
       transform: translateX(-1px) rotateY(100deg)  perspective(40px);
       transform-origin: left top;
     }
+    .card_wrap{
+      width: 200px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: 0.8 s;
+      transform-style: preserve-3d;
+    }
+    .card_wrap>div{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color:#fff;
+      font-size: 1.23em;
+      backface-visibility: hidden;
+    }
+    .card_front{
+      background-color: blue;
+    }
+    .card_back{
+      background-color: red;
+      transform: rotateY(180deg)  rotateZ(10deg) perspective(20px);
+    }
+    .card_wrap:hover{
+      transform: rotateY(180deg) rotateX(180deg)  perspective(20px);
+    }
+    .card_wrap:hover .card_back{
+      transform: rotateX(180deg) rotateY(180deg)  perspective(20px);
+    }
 
+    
+   
+    
   </style>
 </head>
 <body>

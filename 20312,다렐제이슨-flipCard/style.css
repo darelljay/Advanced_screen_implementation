@@ -32,8 +32,6 @@ body {
     gap: 50px;
 } */
 .wrap {
-    position: absolute;
-    top: 50px;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -43,42 +41,77 @@ body {
     gap: 50px;
 }
 
-.wrap > div{
-    transition: all .5s;
-    transform-style: preserve-3d;
-    perspective: 1100px;
-}
-
-.cardWrap{
-
-}
-
-.ironMan:active {
-    transform: rotateY(180deg);
-}
-
-.ironMan>div{
+.wrap>div{
+    width: 250px;
+    height: 400px;
     position: relative;
-    top: 0;
-    left: 0;
 }
-
-.card {
-    width: 300px;
-    height: 450px;
+.card_front{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    background-image: url('./img/avengers_bg.jpg');
     background-size: cover;
     background-position: center;
-    background-image: url('./img/avengers_bg.jpg');
-    border: 10px white solid;
-    border-radius: 15px;
-    transition: all .5s;
-    transform-style: preserve-3d;
+    border: 5px solid white;
+    border-radius: 10px;
 }
-
-.card_back {
-    /* background-size: cover;
+.card_front,.card_back{
+    backface-visibility: hidden;
+}
+/* .ironman{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    background-image: url('./img/IronMan.jpg');
+    background-size: cover;
     background-position: center;
-    background-image: url('./img/avengers_bg.jpg'); */
-    background-color: red;
-}
+    transform: perspective(7000px) rotateY(180deg);
+    transition: 0.4s;
 
+}
+.captin{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    background-image: url('./img/captinAmerica.jpg');
+    background-size: cover;
+    background-position: center;
+    transform: perspective(7000px) rotateY(180deg);
+    transition: all 0.8s;
+
+}
+.spider{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    background-image: url('./img/spiderMan.jpg');
+    background-size: cover;
+    background-position: center;
+    transform: perspective(7000px) rotateY(180deg);
+    transition: 0.4s;
+
+} */
+
+.rotate{
+    transform: translateY(0) ;
+}
+.cardWrap{
+    transition: 0.8s;
+}
+.cardWrap.flip{
+    transform: translateY(180deg);
+}
+.card_back::before{
+    content: '';
+    display: block;
+    background-color: #ccc;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    border-radius: 10px;
+}
