@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intersection Observer01</title>
+  <style>
+    div {
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+    }
+
+    .title {
+      width: 100%;
+      height: 700px;
+    }
+
+    .wrapper {
+      width: 150px;
+      height: 150px;
+      margin: 100px auto;
+      background-color: red;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .wrapper.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <p class="title">스크롤을 해봅시다!</p>
+    <div class="wrapper">
+    </div>
+    <div class="wrapper">
+    </div>
+    <div class="wrapper">
+    </div>
+    <div class="wrapper">
+    </div>
+  </div>
+  <script>
+    // 현재 화면을 기준으로 특정 요소의 위치 정보 
+    // 1. offset 
+    // 가장 가까운 조상 중 position:static 속성이 아닌 조상을 시준으로 하여 요소의 상대 위치값을 가짐
+    // 가장 가까운 relative 속성을 가진 부모요소를 기준으로 상대위치를 구하는것
+
+    // 2. getBoundingCLientRect() 
+    // 반환되는 값은 요소 박스에 대한 크기 정보와 위치 정보(위치는 현재 보여지는 viewport에서의 상대적인 위치)
+
+    //  차이점
+    //  offset은  요소의 크기가 바뀌면 인식을 못해서 원래 값만 반환하고 getBoundingClientRect() 는 
+
+    //  함수 3가지 
+    // - 함수표현식
+    // - 기명함수 표현식 (const func())
+    // - 익명함수 선언식 => ES6 ArrowFunction 
+
+    // const catchBox = (el) => {
+    //   let box = el.getBoundingClientRect();
+    //   return (
+    //     box.top >= 0 &&
+    //     box.left >= 0 &&
+    //     box.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    //     box.right <= (window.innerHeight || document.documentElement.clientWidth)
+    //   );
+    // }
+
+    // window.addEventListener("scroll", (e) => {
+    //   document.querySelectorAll(".wrapper").forEach((el) => {
+    //     if (catchBox(el)) {
+    //       el.classList.add("visible");
+    //     } else {
+    //       el.classList.remove("visible");
+    //     }
+    //   })
+    // });
+
+    // Intersection Observer API
+    // 이 API는 메인 쓰레드에 영향을 주지 않으며 비동기적으로 동작하기 떄문에 
+    // 퍼포먼스 측면에서 getBoundingClientRect()을 사용하는 것보다 효율적이다.
+
+    // 페이지가 스크롤됨에 따라서 이미지나 컨텐츠를 로드하고 싶은 "레이지 로긍(Lazy Loading)" 기법
+    // 광고 수익을 계산하기 위해서 광고의 가시성 여부의 판단 
+    // 사용자가 보고 있는 것에 따라서 작업이나 애니메이션을 수행할지의 여부에 대한 결정 
+
+    // const io = new IntersectionObserver(callback,options) //관람자 초기화
+    // io.observe(element) // 관찰 대상 
+
+    // 관찰할 대상이 등록되거나  가시성이 있는  변화사 생기면 관찰자는 콜백 실행 
+    // 콜백은 2개의 인수(enteries, observer)를 가짐
+
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // 화면에 감지되는지 여부에 따라 visible 클래스 추가 또는 제거 
+          entry.target.classList.add("visible");
+        } else {
+          entry.target.classList.remove("visible");
+        }
+      });
+    });
+
+    document.querySelectorAll(".wrapper").forEach((el) => {
+      io.observe(el);
+    });
+  </script>
+</body>
+</html>
