@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ex02.dataset 속성</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h2 {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 3.5rem;
+      }
+
+      h3 {
+        padding: 10px 0;
+        font-size: 2rem;
+      }
+
+      .container {
+        display: flex;
+        width: 600px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 2px solid #ccc;
+        margin: 30px auto;
+        padding-bottom: 10px;
+      }
+      ul {
+        list-style: decimal;
+        font-size: 1.5rem;
+        line-height: 3rem;
+        cursor: pointer;
+        padding: 20px 0;
+      }
+
+      p {
+        text-align: center;
+        font-size: 1.5rem;
+      }
+
+      #result {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+        opacity: 1;
+        transform: scale(1);
+        /* transform: translateY(30px); */
+      }
+
+      img {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 data-test="This is test">This is dataset test</h2>
+    <hr />
+    <div class="container">
+      <h3>Programming language</h3>
+      <ul>
+        <li class="item" data-img="./img/html_icon.png">HTML</li>
+        <li class="item" data-img="./img/css_icon.png">CSS</li>
+        <li class="item" data-img="./img/js_icon.png">JavaScript</li>
+      </ul>
+    </div>
+
+    <p>Please click one programming language</p>
+    <p id="result"></p>
+
+    <script>
+      const items = document.querySelectorAll(".item");
+      const result = document.querySelector("#result");
+    items.forEach(element=>{
+      element.addEventListener("click",(e)=>{
+        result.replaceChildren();
+        let img = document.createElement("img");
+        let extension_name = "_icon.png";
+        let text = "선택한 언어: "+element.textContent;
+        
+        img.src = element.dataset.img;
+        if(img.hasAttribute("src")){
+          gsap.from(result,{
+            y : 30,
+            opacity: 0,
+            duration: 0.4 ,
+            scale: 0.5,
+            rotate: 45,
+          })
+        }
+        result.append(text,img);
+      });
+    });
+    </script>
+  </body>
+</html>
